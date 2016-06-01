@@ -7,7 +7,7 @@ Cada equipe irá fazer o fork desse projeto e irá extender o projeto com o obje
 
 Requisitos:
 * Sistema de Combate
-* Interface Gráfica
+* Interface Gráfica (do sistema, e não interações de combate, danos entre outro. Apenas para navegação de escolhas e mudança de ventos)
 * Sistema de Personagem Elaborado
   * Itens
   * Atributos
