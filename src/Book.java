@@ -10,9 +10,10 @@ import java.util.Scanner;
  */
 public class Book {
 
-    public Book(String description, Event eventInitial) {
+    public Book(String description, Event eventInitial, Player player) {
         this.eventInitial = eventInitial;
         this.description = description;
+        this.player = player;
 
         this.resetHistory();
     }
@@ -34,18 +35,28 @@ public class Book {
     }
 
     public boolean nextEvent(int number) {
-        Event event = this.choiceEvent(number);
+        Choice choice = this.selectChoice(number);
 
-        if(event != null) {
-            this.eventActually = event;
+        if(choice != null) {
+            choice.executeChoice(player);
+
+            if(player.isAlive()) {
+                this.eventActually = choice.getEvent();
+                this.eventActually.applyHistory(player);
+            }
+            else {
+                Event gameOver = new BlankEvent("Game Over", new ArrayList<Choice>());
+                this.eventActually = gameOver;
+            }
+
             return true;
         }
 
         return false;
     }
 
-    public Event choiceEvent(int number) {
-        return this.eventActually.findEvent(number);
+    public Choice selectChoice(int number) {
+        return this.eventActually.findChoice(number);
     }
 
     public Collection<Choice> nextEvents() {
@@ -55,4 +66,5 @@ public class Book {
     private Event eventActually;
     private Event eventInitial;
     private String description;
+    private Player player;
 }

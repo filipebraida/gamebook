@@ -1,7 +1,7 @@
 /**
  * Created by filipebraida on 31/05/16.
  */
-public class Choice {
+public abstract class Choice {
     public Choice(String description, Event event) {
         this.event = event;
         this.description = description;
@@ -19,11 +19,13 @@ public class Choice {
         return this.number;
     }
 
-    private String description;
-    private Event event;
-    private int number;
-
     public Event getEvent() {
         return this.event;
     }
+
+    public abstract void executeChoice(Character character);
+
+    private String description;
+    private Event event;
+    private int number;
 }

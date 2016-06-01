@@ -4,7 +4,7 @@ import java.util.Collection;
 /**
  * Created by filipebraida on 31/05/16.
  */
-public class Event {
+public abstract class Event {
     public Event(String description, Collection<Choice> choices) {
         this.description = description;
         this.choices = new ArrayList<>();
@@ -32,13 +32,15 @@ public class Event {
         return this.choices;
     }
 
-    public Event findEvent(int number) {
+    public Choice findChoice(int number) {
         for(Choice choice:this.choices) {
-            if(choice.getNumber() == number) return choice.getEvent();
+            if(choice.getNumber() == number) return choice;
         }
 
         return null;
     }
+
+    public abstract void applyHistory(Character character);
 
     private String description;
     private Collection<Choice> choices;

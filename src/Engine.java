@@ -14,10 +14,8 @@ public class Engine {
 
         Scanner in = new Scanner(System.in);
 
-        while(true) {
+        do {
             System.out.println(book.showHistory());
-
-            if(book.isTheEnd()) break;
 
             System.out.println("Escolha:  ");
 
@@ -29,25 +27,25 @@ public class Engine {
             do {
                 i = in.nextInt();
             } while(!book.nextEvent(i));
-        }
+        } while(!book.isTheEnd());
 
-        System.out.println("Fim de Jogo");
+        System.out.println(book.showHistory());
     }
 
     public static Book createBook() {
-        Event eventoFinal = new Event("Você morreu porque o Duarte não mandou ir para a trilha.", new ArrayList<Choice>());
+        Event eventoFinal = new BlankEvent("Você morreu porque o Duarte não mandou ir para a trilha.", new ArrayList<Choice>());
 
         Collection escolhasIniciais = new ArrayList<Choice>();
-        Choice escolhaFinalTrilha = new Choice("Segue a trilha", eventoFinal);
-        Choice escolhaFinalFloresta = new Choice("Fica na floresta", eventoFinal);
+        Choice escolhaFinalTrilha = new BlankChoice("Segue a trilha", eventoFinal);
+        Choice escolhaFinalFloresta = new BlankChoice("Fica na floresta", eventoFinal);
         escolhasIniciais.add(escolhaFinalTrilha);
         escolhasIniciais.add(escolhaFinalFloresta);
 
-        Event eventoInitial = new Event("Você está em uma floresta. " +
+        Event eventoInitial = new BlankEvent("Você está em uma floresta. " +
                 "O Sensei Duarte falou para você ficar na floresta treinando " +
                 "o amakakeiru 12/12.", escolhasIniciais);
 
-        Book livro = new Book("A história da Rural", eventoInitial);
+        Book livro = new Book("A história da Rural", eventoInitial, new Player(10, 10));
 
         return livro;
     }
