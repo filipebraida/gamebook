@@ -3,7 +3,7 @@
 Esse código é a base de um livro jogo. As interações básicas já foram implementadas e o que está faltando é definir a história.
 
 # Instruções
-Cada equipe irá fazer o fork desse projeto e irá extender o projeto com o objetivo em criar o seu próprio livro jogo.
+Cada equipe (de até três pessoas) irá fazer o fork desse projeto e irá extender o projeto com o objetivo em criar o seu próprio livro jogo.
 
 Requisitos:
 * Sistema de Combate
