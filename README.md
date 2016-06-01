@@ -15,7 +15,7 @@ Requisitos:
 
 ## Código
 ### Event
-Na classe _Event_, é importante notar o método applyHistory (o qual é abstrato e deve ser implementado em toda classe que herdar de Evento) realiza a aplicação da descrição do evento para o personagem. Notem, o Evento em si é uma classe abstrata, o que possibilita a criação de diferentes tipos de eventos.
+Na classe _Event_, é importante notar o método _applyHistory_ (o qual é abstrato e deve ser implementado em toda classe que herdar de Evento) realiza a aplicação da descrição do evento para o personagem. Notem, o Evento em si é uma classe abstrata, o que possibilita a criação de diferentes tipos de eventos.
 
 Um exemplo pode ser visto no trecho de código abaixo:
 
