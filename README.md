@@ -33,7 +33,8 @@ Ja existe um personagem (_Player_) e um inimigo (_Enemy_), nos quais vocês pode
 # Exemplo de uma História
 
 ```{.java results="none"}
-Event eventoFinal = new BlankEvent("Você morreu porque o Duarte não mandou ir para a trilha.", new ArrayList<Choice>());
+Event eventoFinal = new BlankEvent("Você morreu porque o Duarte" +
+    "não mandou ir para a trilha.", new ArrayList<Choice>());
 
 Collection escolhasIniciais = new ArrayList<Choice>();
 Choice escolhaFinalTrilha = new BlankChoice("Segue a trilha", eventoFinal);
