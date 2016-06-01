@@ -30,4 +30,22 @@ A classe _Engine_, controla a interação com o usuário e passa as entradas do 
 ## Character
 Ja existe um personagem (_Player_) e um inimigo (_Enemy_), nos quais vocês podem implementar as lógicas relativas às interações do jogo e, além disso, criar suas próprias variações: novos inimigos, novos seres e personagens.
 
+# Exemplo de uma História
+
+```{.java results="none"}
+Event eventoFinal = new BlankEvent("Você morreu porque o Duarte não mandou ir para a trilha.", new ArrayList<Choice>());
+
+Collection escolhasIniciais = new ArrayList<Choice>();
+Choice escolhaFinalTrilha = new BlankChoice("Segue a trilha", eventoFinal);
+Choice escolhaFinalFloresta = new BlankChoice("Fica na floresta", eventoFinal);
+escolhasIniciais.add(escolhaFinalTrilha);
+escolhasIniciais.add(escolhaFinalFloresta);
+
+Event eventoInitial = new BlankEvent("Você está em uma floresta. " +
+    "O Sensei Duarte falou para você ficar na floresta treinando "
+    , escolhasIniciais);
+
+Book livro = new Book("A história da Rural", eventoInitial, new Player(10, 10));
+```
+
 **Observações:** Vocês podem criar novos itens, instâncias, eventos e qualquer interação que acharem relevantes ao jogo.
