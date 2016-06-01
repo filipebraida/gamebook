@@ -5,10 +5,17 @@ import java.util.Collection;
  * Created by filipebraida on 31/05/16.
  */
 public class Event {
-    public Event(String description, Collection<Event> choices) {
+    public Event(String description, Collection<Choice> choices) {
         this.description = description;
         this.choices = new ArrayList<>();
-        this.choices.addAll(choices);
+
+        int i = 0;
+        for(Choice choice:choices) {
+            choice.defineNumber(i);
+            this.choices.add(choice);
+            i++;
+        }
+
     }
 
     public String history() {
@@ -21,10 +28,18 @@ public class Event {
         return false;
     }
 
-    public Collection<Event> nextEvents() {
+    public Collection<Choice> nextEvents() {
         return this.choices;
     }
 
+    public Event findEvent(int number) {
+        for(Choice choice:this.choices) {
+            if(choice.getNumber() == number) return choice.getEvent();
+        }
+
+        return null;
+    }
+
     private String description;
-    private Collection<Event> choices;
+    private Collection<Choice> choices;
 }

@@ -12,8 +12,13 @@ public class Book {
 
     public Book(String description, Event eventInitial) {
         this.eventInitial = eventInitial;
-        this.eventActually = eventInitial;
         this.description = description;
+
+        this.resetHistory();
+    }
+
+    public void resetHistory() {
+        this.eventActually = this.eventInitial;
     }
 
     public String showHistory() {
@@ -28,47 +33,25 @@ public class Book {
         return this.description;
     }
 
-    public static void main(String[] args) throws IOException {
-        Book book = Book.createBook();
+    public boolean nextEvent(int number) {
+        Event event = this.choiceEvent(number);
 
-        System.out.println(book.showHistoryBook());
-
-        Scanner in = new Scanner(System.in);
-
-        while(true) {
-            System.out.println(book.showHistory());
-
-            if(book.isTheEnd()) break;
-
-            System.out.printf("Escolha a opção:  ");
-
-            for(Event event:book.nextEvents()) {
-                System.out.println();
-                System.out.println(event.history());
-            }
-            int i = in.nextInt();
-
-            System.out.println(i);
+        if(event != null) {
+            this.eventActually = event;
+            return true;
         }
+
+        return false;
     }
 
-    public Collection<Event> nextEvents() {
+    public Event choiceEvent(int number) {
+        return this.eventActually.findEvent(number);
+    }
+
+    public Collection<Choice> nextEvents() {
         return this.eventActually.nextEvents();
     }
 
-    public static Book createBook() {
-        Event eventoFinal = new Event("Game Over", new ArrayList<Event>());
-        Collection eventosIniciais = new ArrayList<Event>();
-        eventosIniciais.add(eventoFinal);
-
-        Event eventoInitial = new Event("Bem vindo a história", eventosIniciais);
-
-        Book livro = new Book("Vem vindo a história X", eventoInitial);
-
-        return livro;
-    }
-
-    private Character character;
     private Event eventActually;
     private Event eventInitial;
     private String description;
