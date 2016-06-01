@@ -6,10 +6,20 @@ Na classe _Event_, é importante notar o método applyHistory (o qual é abstrat
 
 Um exemplo pode ser visto no trecho de código abaixo:
 
-TODO: colocar exemplo do applyHistory
+```{.java results="none"}
+public void applyHistory(Character character) {
+
+}
+```
 
 ## Choice
 A classe _Choice_, a qual também é abstrata, define as opções que o player irá realizar a cada evento. Duas classes pré defininas que herdam de _Choice_ são _BattleChoice_ e _BlankChoice_. A primeira lida com as escolhas de batalha e deve ser implementada de forma a refletir como as iterações com os inimigos devem acontecer. Já a segunda, é um padrão para execução de escolhas, as quais devem ser implementadas e definidas durante o desenvolvimento do trabalho.
+
+```{.java results="none"}
+public void executeChoice(Character character) {
+
+}
+```
 
 ## Book
 A classe _Book_ faz o controle do fluxo da história, onde os eventos são tratados e tem sua interação com o personagem.
