@@ -10,7 +10,7 @@ public abstract class Event {
         this.choices = new ArrayList<>();
 
         int i = 0;
-        for(Choice choice:choices) {
+        for (Choice choice : choices) {
             choice.defineNumber(i);
             this.choices.add(choice);
             i++;
@@ -23,9 +23,7 @@ public abstract class Event {
     }
 
     public boolean isEndEvent() {
-        if(this.choices.isEmpty()) return true;
-
-        return false;
+        return choices.isEmpty();
     }
 
     public Collection<Choice> nextEvents() {
@@ -33,8 +31,8 @@ public abstract class Event {
     }
 
     public Choice findChoice(int number) {
-        for(Choice choice:this.choices) {
-            if(choice.getNumber() == number) return choice;
+        for (Choice choice : this.choices) {
+            if (choice.getNumber() == number) return choice;
         }
 
         return null;

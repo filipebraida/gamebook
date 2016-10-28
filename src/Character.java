@@ -3,8 +3,8 @@
  */
 public class Character {
 
-    public Character(int life, int attack) {
-        this.life = life;
+    public Character(int health, int attack) {
+        this.health = health;
         this.attack = attack;
     }
 
@@ -14,20 +14,21 @@ public class Character {
     }
 
     public boolean isAlive() {
-        if(this.life > 0)
-            return true;
-
-        return false;
+        return health > 0;
     }
 
     public void takeDamage(int attack) {
-        this.life -= attack;
+        this.health -= attack;
     }
 
     public int getAttack() {
         return this.attack;
     }
 
-    private int life;
+    public int getHealth() {
+        return health;
+    }
+
+    private int health;
     private int attack;
 }

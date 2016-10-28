@@ -2,13 +2,12 @@
  * Created by filipebraida on 31/05/16.
  */
 public abstract class Choice {
-    public Choice(String description, Event event) {
-        this.event = event;
+    public Choice(String description) {
         this.description = description;
     }
 
     public String getDescription() {
-        return number + ": "+ this.description;
+        return number + ": " + this.description;
     }
 
     public void defineNumber(int number) {
@@ -19,13 +18,10 @@ public abstract class Choice {
         return this.number;
     }
 
-    public Event getEvent() {
-        return this.event;
-    }
+    public abstract Event getNextEvent();
 
     public abstract void executeChoice(Character character);
 
     private String description;
-    private Event event;
     private int number;
 }

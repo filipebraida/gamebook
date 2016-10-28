@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 /**
@@ -8,7 +7,7 @@ import java.util.Scanner;
  */
 public class Engine {
     public static void main(String[] args) throws IOException {
-        Book book = Engine.createBook();
+        Book book = Engine.testBook();
 
         System.out.println(book.showHistoryBook());
 
@@ -19,34 +18,34 @@ public class Engine {
 
             System.out.println("Escolha:  ");
 
-            for(Choice choice:book.nextEvents()) {
+            for (Choice choice : book.nextEvents()) {
                 System.out.println(choice.getDescription());
             }
 
             int i;
             do {
                 i = in.nextInt();
-            } while(!book.nextEvent(i));
-        } while(!book.isTheEnd());
+            } while (!book.nextEvent(i));
+        } while (!book.isTheEnd());
 
         System.out.println(book.showHistory());
     }
 
-    public static Book createBook() {
-        Event eventoFinal = new BlankEvent("Você morreu porque o Duarte não mandou ir para a trilha.", new ArrayList<Choice>());
+    public static Book testBook() {
+        Player player = new Player(10, 10);
+        Event eventoFinal = new BlankEvent("IS DEAD", new ArrayList<>());
 
-        Collection escolhasIniciais = new ArrayList<Choice>();
-        Choice escolhaFinalTrilha = new BlankChoice("Segue a trilha", eventoFinal);
-        Choice escolhaFinalFloresta = new BlankChoice("Fica na floresta", eventoFinal);
-        escolhasIniciais.add(escolhaFinalTrilha);
-        escolhasIniciais.add(escolhaFinalFloresta);
+        ArrayList<Choice> start = new ArrayList<>();
 
-        Event eventoInitial = new BlankEvent("Você está em uma floresta. " +
-                "O Sensei Duarte falou para você ficar na floresta treinando " +
-                "o amakakeiru 12/12.", escolhasIniciais);
+        Enemy monstro = new Enemy(5, 5);
+        BattleEvent battle = BattleEvent.makeBattleEvent(eventoFinal, monstro, player);
+        Choice help = new BlankChoice("correr", eventoFinal);
+        Choice fite = new BlankChoice("bater", battle);
+        start.add(help);
+        start.add(fite);
 
-        Book livro = new Book("A história da Rural", eventoInitial, new Player(10, 10));
+        Event inicial = new BlankEvent("Você encontrou um bodybuilder!", start);
 
-        return livro;
+        return new Book("aaa", inicial, player);
     }
 }

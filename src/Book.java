@@ -1,9 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Scanner;
 
 /**
  * Created by filipebraida on 31/05/16.
@@ -30,21 +26,20 @@ public class Book {
         return this.eventActually.isEndEvent();
     }
 
-    public String showHistoryBook(){
+    public String showHistoryBook() {
         return this.description;
     }
 
     public boolean nextEvent(int number) {
         Choice choice = this.selectChoice(number);
 
-        if(choice != null) {
+        if (choice != null) {
             choice.executeChoice(player);
 
-            if(player.isAlive()) {
-                this.eventActually = choice.getEvent();
+            if (player.isAlive()) {
+                this.eventActually = choice.getNextEvent();
                 this.eventActually.applyHistory(player);
-            }
-            else {
+            } else {
                 Event gameOver = new BlankEvent("Game Over", new ArrayList<Choice>());
                 this.eventActually = gameOver;
             }
