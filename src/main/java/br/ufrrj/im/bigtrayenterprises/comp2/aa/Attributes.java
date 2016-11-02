@@ -32,4 +32,14 @@ public class Attributes {
         this.armor = other.armor;
         this.firepower = other.firepower;
     }
+
+    public void concatenate(Attributes other) {
+        this.health += other.health;
+        this.mana += other.mana;
+        this.strength += other.strength;
+        this.agility += other.agility;
+        this.resistance += other.resistance;
+        this.armor += other.armor;
+        this.firepower += other.firepower;
+    }
 }

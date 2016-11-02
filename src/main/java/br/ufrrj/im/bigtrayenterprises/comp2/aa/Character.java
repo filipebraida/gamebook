@@ -1,13 +1,20 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
+import java.util.ArrayList;
+
 /**
  * Created by filipebraida on 31/05/16.
  */
 public class Character {
 
-    public Character(Attributes attributes) {
+    public Character(Attributes attributes, ArrayList<Item> items) {
         this.attributes = attributes;
         this.tempAttributes = new Attributes(attributes);
+        this.items = items;
+    }
+
+    public Character(Attributes attributes) {
+        this(attributes, new ArrayList<>());
     }
 
     public void battle(Character enemy) {
@@ -52,10 +59,21 @@ public class Character {
         return tempAttributes.health > 0;
     }
 
+    public void addItem(Item item) {
+        items.add(item);
+    }
+
     public Attributes getAttributes() {
-        return tempAttributes;
+        Attributes tempWithItems = new Attributes(tempAttributes);
+
+        for (Item item : items) {
+            tempWithItems.concatenate(item.getAttributes());
+        }
+
+        return tempWithItems;
     }
 
     private Attributes tempAttributes;
     private final Attributes attributes;
+    private ArrayList<Item> items;
 }

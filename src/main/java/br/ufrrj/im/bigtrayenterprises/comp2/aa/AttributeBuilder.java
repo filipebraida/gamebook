@@ -1,11 +1,11 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
 public class AttributeBuilder {
-    private int strength = 2;
-    private int agility = 2;
-    private int resistance = 2;
-    private int armor = 2;
-    private int firepower = 2;
+    private int strength = 0;
+    private int agility = 0;
+    private int resistance = 0;
+    private int armor = 0;
+    private int firepower = 0;
 
     public AttributeBuilder setStrength(int strength) {
         this.strength = strength;
