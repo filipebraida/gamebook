@@ -7,6 +7,6 @@ apply plugin: 'java'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'Engine'
+        attributes 'Main-Class': 'br.ufrrj.im.bigtrayenterprises.comp2.aa.Engine'
     }
 }
