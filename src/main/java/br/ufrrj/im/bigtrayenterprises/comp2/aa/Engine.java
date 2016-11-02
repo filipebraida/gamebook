@@ -1,11 +1,16 @@
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
  * Created by filipebraida on 31/05/16.
  */
 public class Engine {
+    public static Random random = new Random();
+
     public static void main(String[] args) throws IOException {
         Book book = Engine.testBook();
 
@@ -32,12 +37,21 @@ public class Engine {
     }
 
     public static Book testBook() {
-        Player player = new Player(10, 10);
+        Attributes attr = new AttributeBuilder().createAttributes();
+        Player player = new Player(attr);
         Event eventoFinal = new BlankEvent("IS DEAD", new ArrayList<>());
 
         ArrayList<Choice> start = new ArrayList<>();
 
-        Enemy monstro = new Enemy(5, 5);
+        Attributes monstroAttr = new AttributeBuilder()
+                .setAgility(2)
+                .setStrength(1)
+                .setResistance(1)
+                .setArmor(0)
+                .setFirepower(0)
+                .createAttributes();
+
+        Enemy monstro = new Enemy(monstroAttr);
         BattleEvent battle = BattleEvent.makeBattleEvent(eventoFinal, monstro, player);
         Choice help = new BlankChoice("correr", eventoFinal);
         Choice fite = new BlankChoice("bater", battle);

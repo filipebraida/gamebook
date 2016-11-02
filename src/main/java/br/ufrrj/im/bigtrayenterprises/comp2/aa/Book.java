@@ -1,3 +1,5 @@
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,7 +21,7 @@ public class Book {
     }
 
     public String showHistory() {
-        return this.eventActually.history();
+        return this.eventActually.getDescription();
     }
 
     public boolean isTheEnd() {
@@ -55,7 +57,7 @@ public class Book {
     }
 
     public Collection<Choice> nextEvents() {
-        return this.eventActually.nextEvents();
+        return this.eventActually.getChoices();
     }
 
     private Event eventActually;
