@@ -1,3 +1,5 @@
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+
 import java.util.ArrayList;
 
 /**
@@ -7,7 +9,7 @@ public class BattleEvent extends Event {
 
     // yeah java is kind of special.
     public static BattleEvent makeBattleEvent(Event postBattleEvent, Enemy enemy, Character player) {
-        String desc = String.format("Seu HP: %d, HP do inimigo: %d", player.getHealth(), enemy.getHealth());
+        String desc = String.format("Seu HP: %d, HP do inimigo: %d", player.getAttributes().health, enemy.getAttributes().health);
         ArrayList<Choice> choices = new ArrayList<>();
 
         choices.add(new BattleChoice("Lutar!", postBattleEvent, enemy));

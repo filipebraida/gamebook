@@ -1,3 +1,5 @@
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -18,7 +20,7 @@ public abstract class Event {
 
     }
 
-    public String history() {
+    public String getDescription() {
         return this.description;
     }
 
@@ -26,7 +28,7 @@ public abstract class Event {
         return choices.isEmpty();
     }
 
-    public Collection<Choice> nextEvents() {
+    public Collection<Choice> getChoices() {
         return this.choices;
     }
 
