@@ -37,8 +37,28 @@ public class Engine {
     }
 
     public static Book testBook() {
-        Attributes attr = new AttributeBuilder().createAttributes();
+        Attributes attr = new AttributeBuilder()
+                .setAgility(2)
+                .setStrength(2)
+                .setResistance(2)
+                .setArmor(2)
+                .setFirepower(2)
+                .createAttributes();
+
         Player player = new Player(attr);
+        player.addItem(
+                new BlankItem(
+                        "Ironwood Branch",
+                        new AttributeBuilder()
+                                .setAgility(1)
+                                .setStrength(1)
+                                .setResistance(1)
+                                .setArmor(1)
+                                .setFirepower(1)
+                                .createAttributes()
+                )
+        );
+
         Event eventoFinal = new BlankEvent("IS DEAD", new ArrayList<>());
 
         ArrayList<Choice> start = new ArrayList<>();
