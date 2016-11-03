@@ -1,4 +1,4 @@
-package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package main.java.br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
 /**
  * Uma classe representando um item simples, que não pode ser usado.
