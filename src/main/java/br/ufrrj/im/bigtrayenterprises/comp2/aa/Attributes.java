@@ -1,4 +1,4 @@
-package main.java.br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
 /**
  * Created by vitorhnn on 01/11/16.
@@ -43,13 +43,9 @@ public class Attributes {
         this.firepower += other.firepower;
     }
 
-    public int getStrength() {
-        return strength;
-    }
-
     public int getCarryCapacity() {
         int carryCapacity = 25;
-        for(int i = 0; i < getStrength() ; i++) {
+        for (int i = 0; i < strength; i++) {
             carryCapacity *= 2;
         }
         return carryCapacity;

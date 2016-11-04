@@ -1,4 +1,4 @@
-package main.java.br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
 /**
  * Created by andrei on 02/11/16.

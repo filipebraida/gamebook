@@ -1,4 +1,4 @@
-package main.java.br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
 /**
  * Representa um item genérico, que pode (ou não) ser usado durante o combate, e que adiciona seus atributos

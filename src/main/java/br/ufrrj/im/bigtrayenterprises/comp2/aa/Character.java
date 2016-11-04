@@ -1,4 +1,4 @@
-package main.java.br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
 import java.util.ArrayList;
 
@@ -60,15 +60,15 @@ public class Character {
     }
 
     public void addItem(Item item) {
-        Attributes atrr = new Attributes(getAttributes());
+        Attributes attr = new Attributes(getAttributes());
 
         int totalWeight = 0;
-        for(Item i : inventory) {
+        for (Item i : inventory) {
             totalWeight += i.getWeight();
         }
 
-        if(atrr.getCarryCapacity() < item.getWeight() + totalWeight) {
-            System.out.println("Invetário muito cheio!");
+        if (attr.getCarryCapacity() < item.getWeight() + totalWeight) {
+            System.out.println("Inventário muito cheio!");
         } else {
             System.out.println("Item adicionado ao inventário!");
             inventory.add(item);
@@ -78,8 +78,16 @@ public class Character {
     public Attributes getAttributes() {
         Attributes tempWithItems = new Attributes(tempAttributes);
 
-        for (Item item : equipped) {
-            tempWithItems.concatenate(item.getAttributes());
+        if (currentWeapon != null) {
+            tempWithItems.concatenate(currentWeapon.getAttributes());
+        }
+
+        if (currentAmulet != null) {
+            tempWithItems.concatenate(currentAmulet.getAttributes());
+        }
+
+        if (currentArmor != null) {
+            tempWithItems.concatenate(currentArmor.getAttributes());
         }
 
         return tempWithItems;
@@ -88,36 +96,24 @@ public class Character {
     public void equipItem(Item item) {
         if (item instanceof Activable) {
             System.out.println("Não é um item equipável!");
-        } else {
-            if (item instanceof Weapon) {
-                for (Item i : equipped) {
-                    if (i instanceof Weapon) {
-                        System.out.println("Desequipou " + i.getName());
-                        equipped.remove(i);
-                    }
-                }
-            } else if (item instanceof Amulet) {
-                for (Item i : equipped) {
-                    if (i instanceof Amulet) {
-                        System.out.println("Desequipou " + i.getName());
-                        equipped.remove(i);
-                    }
-                }
-            } else if (item instanceof Armor) {
-                for (Item i : equipped) {
-                    if (i instanceof Armor) {
-                        System.out.println("Desequipou " + i.getName());
-                        equipped.remove(i);
-                    }
-                }
-            }
+            return;
+        }
+
+        if (item instanceof Weapon) {
+            currentWeapon = (Weapon) item;
+        } else if (item instanceof Amulet) {
+            currentAmulet = (Amulet) item;
+        } else if (item instanceof Armor) {
+            currentArmor = (Armor) item;
         }
         System.out.println("Equipou " + item.getName());
-        equipped.add(item);
     }
 
     private Attributes tempAttributes;
     private Attributes attributes;
     private ArrayList<Item> inventory;
-    private ArrayList<Item> equipped;
+
+    private Weapon currentWeapon;
+    private Armor currentArmor;
+    private Amulet currentAmulet;
 }

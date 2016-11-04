@@ -1,4 +1,4 @@
-package main.java.br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
 public class AttributeBuilder {
     private int strength = 0;
