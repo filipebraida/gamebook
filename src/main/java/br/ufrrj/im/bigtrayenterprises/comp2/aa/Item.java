@@ -5,9 +5,10 @@ package br.ufrrj.im.bigtrayenterprises.comp2.aa;
  * ao seu respectivo Character.
  */
 public abstract class Item {
-    public Item(String name, Attributes attributes) {
+    public Item(String name, Attributes attributes, int weight) {
         this.name = name;
         this.attributes = attributes;
+        this.weight = weight;
     }
 
     public Attributes getAttributes() {
@@ -21,6 +22,15 @@ public abstract class Item {
      */
     public abstract void use(Character character);
 
+    public String getName() {
+        return name;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
     private final String name;
     private final Attributes attributes;
+    private final int weight;
 }

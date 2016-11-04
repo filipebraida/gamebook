@@ -42,4 +42,12 @@ public class Attributes {
         this.armor += other.armor;
         this.firepower += other.firepower;
     }
+
+    public int getCarryCapacity() {
+        int carryCapacity = 25;
+        for (int i = 0; i < strength; i++) {
+            carryCapacity *= 2;
+        }
+        return carryCapacity;
+    }
 }

@@ -7,10 +7,10 @@ import java.util.ArrayList;
  */
 public class Character {
 
-    public Character(Attributes attributes, ArrayList<Item> items) {
+    public Character(Attributes attributes, ArrayList<Item> inventory) {
         this.attributes = attributes;
         this.tempAttributes = new Attributes(attributes);
-        this.items = items;
+        this.inventory = inventory;
     }
 
     public Character(Attributes attributes) {
@@ -60,20 +60,60 @@ public class Character {
     }
 
     public void addItem(Item item) {
-        items.add(item);
+        Attributes attr = new Attributes(getAttributes());
+
+        int totalWeight = 0;
+        for (Item i : inventory) {
+            totalWeight += i.getWeight();
+        }
+
+        if (attr.getCarryCapacity() < item.getWeight() + totalWeight) {
+            System.out.println("Inventário muito cheio!");
+        } else {
+            System.out.println("Item adicionado ao inventário!");
+            inventory.add(item);
+        }
     }
 
     public Attributes getAttributes() {
         Attributes tempWithItems = new Attributes(tempAttributes);
 
-        for (Item item : items) {
-            tempWithItems.concatenate(item.getAttributes());
+        if (currentWeapon != null) {
+            tempWithItems.concatenate(currentWeapon.getAttributes());
+        }
+
+        if (currentAmulet != null) {
+            tempWithItems.concatenate(currentAmulet.getAttributes());
+        }
+
+        if (currentArmor != null) {
+            tempWithItems.concatenate(currentArmor.getAttributes());
         }
 
         return tempWithItems;
     }
 
+    public void equipItem(Item item) {
+        if (item instanceof Activable) {
+            System.out.println("Não é um item equipável!");
+            return;
+        }
+
+        if (item instanceof Weapon) {
+            currentWeapon = (Weapon) item;
+        } else if (item instanceof Amulet) {
+            currentAmulet = (Amulet) item;
+        } else if (item instanceof Armor) {
+            currentArmor = (Armor) item;
+        }
+        System.out.println("Equipou " + item.getName());
+    }
+
     private Attributes tempAttributes;
-    private final Attributes attributes;
-    private ArrayList<Item> items;
+    private Attributes attributes;
+    private ArrayList<Item> inventory;
+
+    private Weapon currentWeapon;
+    private Armor currentArmor;
+    private Amulet currentAmulet;
 }

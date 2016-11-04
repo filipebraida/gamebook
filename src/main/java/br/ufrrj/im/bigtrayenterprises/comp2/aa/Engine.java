@@ -46,8 +46,8 @@ public class Engine {
                 .createAttributes();
 
         Player player = new Player(attr);
-        player.addItem(
-                new BlankItem(
+        Item branch =
+                new Amulet(
                         "Ironwood Branch",
                         new AttributeBuilder()
                                 .setAgility(1)
@@ -55,9 +55,17 @@ public class Engine {
                                 .setResistance(1)
                                 .setArmor(1)
                                 .setFirepower(1)
-                                .createAttributes()
-                )
-        );
+                                .createAttributes(),
+                        10
+                ) {
+                    @Override
+                    public void use(Character character) {
+                        // nothing!
+                    }
+                };
+
+        player.addItem(branch);
+        player.equipItem(branch);
 
         Event eventoFinal = new BlankEvent("IS DEAD", new ArrayList<>());
 
