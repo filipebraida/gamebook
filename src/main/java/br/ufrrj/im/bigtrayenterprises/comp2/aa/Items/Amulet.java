@@ -1,4 +1,6 @@
-package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa.Items;
+
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Attributes;
 
 /**
  * Created by andrei on 02/11/16.

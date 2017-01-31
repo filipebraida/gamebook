@@ -1,5 +1,16 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Enemy;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.BlankChoice;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BattleEvent;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BlankEvent;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Amulet;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Item;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
@@ -60,7 +71,7 @@ public class Engine {
                 ) {
                     @Override
                     public void use(Character character) {
-                        // nothing!
+                        character.changeHealth(-5);
                     }
                 };
 

@@ -1,4 +1,7 @@
-package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa.Items;
+
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Attributes;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
 
 /**
  * Representa um item genérico, que pode (ou não) ser usado durante o combate, e que adiciona seus atributos

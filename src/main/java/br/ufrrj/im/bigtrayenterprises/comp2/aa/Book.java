@@ -1,5 +1,10 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BlankEvent;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
+
 import java.util.ArrayList;
 import java.util.Collection;
 

@@ -1,4 +1,8 @@
-package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters;
+
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Attributes;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Engine;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.*;
 
 import java.util.ArrayList;
 import java.util.Collection;

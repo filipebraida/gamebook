@@ -1,4 +1,9 @@
-package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices;
+
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Enemy;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BattleEvent;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
 
 /**
  * Created by filipebraida on 31/05/16.

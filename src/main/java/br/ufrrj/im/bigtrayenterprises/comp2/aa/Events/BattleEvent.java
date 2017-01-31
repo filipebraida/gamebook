@@ -1,4 +1,9 @@
-package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa.Events;
+
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Enemy;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.BattleChoice;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
 
 import java.util.ArrayList;
 
