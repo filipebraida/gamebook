@@ -1,13 +1,14 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by filipebraida on 31/05/16.
  */
 public class Character {
 
-    public Character(Attributes attributes, ArrayList<Item> inventory) {
+    public Character(Attributes attributes, Collection<Item> inventory) {
         this.attributes = attributes;
         this.tempAttributes = new Attributes(attributes);
         this.inventory = inventory;
@@ -111,7 +112,7 @@ public class Character {
 
     private Attributes tempAttributes;
     private Attributes attributes;
-    private ArrayList<Item> inventory;
+    private Collection<Item> inventory;
 
     private Weapon currentWeapon;
     private Armor currentArmor;
