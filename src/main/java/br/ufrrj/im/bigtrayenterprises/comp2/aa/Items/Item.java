@@ -8,10 +8,11 @@ import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
  * ao seu respectivo Character.
  */
 public abstract class Item {
-    public Item(String name, Attributes attributes, int weight) {
+    public Item(String name, Attributes attributes, int weight, ItemType type) {
         this.name = name;
         this.attributes = attributes;
         this.weight = weight;
+        this.type = type;
     }
 
     public Attributes getAttributes() {
@@ -33,7 +34,12 @@ public abstract class Item {
         return weight;
     }
 
+    public ItemType getType() {
+        return type;
+    }
+
     private final String name;
     private final Attributes attributes;
     private final int weight;
+    private final ItemType type;
 }

@@ -4,6 +4,7 @@ import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Enemy;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.BattleChoice;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Usable;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,9 @@ public class BattleEvent extends Event {
         String desc = String.format("Seu HP: %d, HP do inimigo: %d", player.getAttributes().health, enemy.getAttributes().health);
         ArrayList<Choice> choices = new ArrayList<>();
 
-        choices.add(new BattleChoice("Lutar!", postBattleEvent, enemy));
+        for (Usable u : player.getUsables()) {
+            choices.add(new BattleChoice(u.getDescription(), postBattleEvent, enemy, u));
+        }
 
         return new BattleEvent(desc, choices);
     }

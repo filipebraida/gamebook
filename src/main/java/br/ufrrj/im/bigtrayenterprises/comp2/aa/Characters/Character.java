@@ -2,7 +2,9 @@ package br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters;
 
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Attributes;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Engine;
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.*;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Item;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Skills.Skill;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Usable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,36 +14,15 @@ import java.util.Collection;
  */
 public class Character {
 
-    public Character(Attributes attributes, Collection<Item> inventory) {
+    public Character(Attributes attributes, Collection<Item> inventory, Collection<Skill> skills) {
         this.attributes = attributes;
         this.tempAttributes = new Attributes(attributes);
         this.inventory = inventory;
+        this.skills = skills;
     }
 
     public Character(Attributes attributes) {
-        this(attributes, new ArrayList<>());
-    }
-
-    public void battle(Character enemy) {
-        {
-            int damage = getAttackPower() - enemy.getDefensePower();
-
-            if (damage <= 0) {
-                damage = 1;
-            }
-
-            enemy.changeHealth(-damage);
-        }
-
-        {
-            int damage = enemy.getAttackPower() - getDefensePower();
-
-            if (damage <= 0) {
-                damage = 1;
-            }
-
-            changeHealth(-damage);
-        }
+        this(attributes, new ArrayList<>(), new ArrayList<>());
     }
 
     public int getDefensePower() {
@@ -54,30 +35,6 @@ public class Character {
         Attributes thisAttr = getAttributes();
 
         return thisAttr.strength + thisAttr.agility + Engine.random.nextInt(5) + 1;
-    }
-
-    public void changeHealth(int delta) {
-        tempAttributes.health += delta;
-    }
-
-    public boolean isAlive() {
-        return tempAttributes.health > 0;
-    }
-
-    public void addItem(Item item) {
-        Attributes attr = new Attributes(getAttributes());
-
-        int totalWeight = 0;
-        for (Item i : inventory) {
-            totalWeight += i.getWeight();
-        }
-
-        if (attr.getCarryCapacity() < item.getWeight() + totalWeight) {
-            System.out.println("Inventário muito cheio!");
-        } else {
-            System.out.println("Item adicionado ao inventário!");
-            inventory.add(item);
-        }
     }
 
     public Attributes getAttributes() {
@@ -98,18 +55,62 @@ public class Character {
         return tempWithItems;
     }
 
-    public void equipItem(Item item) {
-        if (item instanceof Activable) {
-            System.out.println("Não é um item equipável!");
-            return;
+    public Collection<Usable> getUsables() {
+        ArrayList<Usable> retval = new ArrayList<>();
+
+        for (Item i : inventory) {
+            if (i instanceof Usable) {
+                retval.add((Usable) i);
+            }
         }
 
-        if (item instanceof Weapon) {
-            currentWeapon = (Weapon) item;
-        } else if (item instanceof Amulet) {
-            currentAmulet = (Amulet) item;
-        } else if (item instanceof Armor) {
-            currentArmor = (Armor) item;
+        retval.addAll(skills);
+
+        return retval;
+    }
+
+    public boolean isAlive() {
+        return tempAttributes.health > 0;
+    }
+
+    public void changeHealth(int delta) {
+        tempAttributes.health += delta;
+    }
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+    }
+
+    public void addItem(Item item) {
+        Attributes attr = new Attributes(getAttributes());
+
+        int totalWeight = 0;
+        for (Item i : inventory) {
+            totalWeight += i.getWeight();
+        }
+
+        if (attr.getCarryCapacity() < item.getWeight() + totalWeight) {
+            System.out.println("Inventário muito cheio!");
+        } else {
+            System.out.println("Item adicionado ao inventário!");
+            inventory.add(item);
+        }
+    }
+
+
+    public void equipItem(Item item) {
+        switch (item.getType()) {
+            case AMULET:
+                currentAmulet = item;
+                break;
+            case ARMOR:
+                currentArmor = item;
+                break;
+            case WEAPON:
+                currentArmor = item;
+                break;
+            default:
+                throw new IllegalArgumentException("Attempted to equip an unequippable item");
         }
         System.out.println("Equipou " + item.getName());
     }
@@ -117,8 +118,9 @@ public class Character {
     private Attributes tempAttributes;
     private Attributes attributes;
     private Collection<Item> inventory;
+    private Collection<Skill> skills;
 
-    private Weapon currentWeapon;
-    private Armor currentArmor;
-    private Amulet currentAmulet;
+    private Item currentWeapon;
+    private Item currentArmor;
+    private Item currentAmulet;
 }

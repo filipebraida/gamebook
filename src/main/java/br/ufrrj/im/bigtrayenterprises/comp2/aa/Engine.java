@@ -8,8 +8,8 @@ import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BattleEvent;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BlankEvent;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Amulet;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Item;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.ItemType;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public class Engine {
 
         Player player = new Player(attr);
         Item branch =
-                new Amulet(
+                new Item(
                         "Ironwood Branch",
                         new AttributeBuilder()
                                 .setAgility(1)
@@ -67,7 +67,8 @@ public class Engine {
                                 .setArmor(1)
                                 .setFirepower(1)
                                 .createAttributes(),
-                        10
+                        10,
+                        ItemType.AMULET
                 ) {
                     @Override
                     public void use(Character character) {
