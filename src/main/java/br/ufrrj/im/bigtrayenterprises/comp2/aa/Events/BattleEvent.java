@@ -1,36 +1,64 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa.Events;
 
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.AICharacter;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Enemy;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.BattleChoice;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Usable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by vitorhnn on 28/10/16.
  */
 public class BattleEvent extends Event {
+    public BattleEvent(Event postBattleEvent, AICharacter enemy, Player player) {
+        super(new ArrayList<>());
 
-    // yeah java is kind of special.
-    public static BattleEvent makeBattleEvent(Event postBattleEvent, Enemy enemy, Character player) {
-        String desc = String.format("Seu HP: %d, HP do inimigo: %d", player.getAttributes().health, enemy.getAttributes().health);
-        ArrayList<Choice> choices = new ArrayList<>();
-
-        for (Usable u : player.getUsables()) {
-            choices.add(new BattleChoice(u.getDescription(), postBattleEvent, enemy, u));
-        }
-
-        return new BattleEvent(desc, choices);
+        this.postBattleEvent = postBattleEvent;
+        this.enemy = enemy;
+        this.player = player;
     }
 
-    private BattleEvent(String description, ArrayList<Choice> choices) {
-        super(description, choices);
+    @Override
+    public String getDescription() {
+        return String.format("Seu HP: %d, HP do inimigo: %d", player.getAttributes().health, enemy.getAttributes().health);
+    }
+
+    @Override
+    public Collection<Choice> getChoices() {
+        // this is kind of a hack, and I should be ashamed of it
+        // but it is needed to load the player's usables when the event triggers, not when it's built
+        ArrayList<Choice> retval = new ArrayList<>();
+
+        int i = 0;
+        for (Usable usable : player.getUsables()) {
+            Choice bChoice = new BattleChoice(postBattleEvent, enemy, usable);
+            bChoice.defineNumber(i);
+
+            retval.add(bChoice);
+
+            i++;
+        }
+
+        this.addChoices(retval);
+
+        return retval;
+    }
+
+    @Override
+    public boolean isEndEvent() {
+        return false;
     }
 
     @Override
     public void applyHistory(Character character) {
         // nothing!
     }
+
+    private Event postBattleEvent;
+    private AICharacter enemy;
+    private Player player;
 }

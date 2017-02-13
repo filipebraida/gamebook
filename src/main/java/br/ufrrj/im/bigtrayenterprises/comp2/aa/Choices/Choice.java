@@ -1,6 +1,6 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices;
 
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
 
 /**
@@ -25,7 +25,7 @@ public abstract class Choice {
 
     public abstract Event getNextEvent();
 
-    public abstract void executeChoice(Character character);
+    public abstract void executeChoice(Player player);
 
     private String description;
     private int number;

@@ -47,7 +47,7 @@ public class Book {
                 this.eventActually = choice.getNextEvent();
                 this.eventActually.applyHistory(player);
             } else {
-                Event gameOver = new BlankEvent("Game Over", new ArrayList<Choice>());
+                Event gameOver = new BlankEvent(new ArrayList<Choice>(), "Game Over");
                 this.eventActually = gameOver;
             }
 

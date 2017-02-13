@@ -9,12 +9,20 @@ import java.util.Collection;
  * Created by filipebraida on 31/05/16.
  */
 public class BlankEvent extends Event {
-    public BlankEvent(String description, Collection<Choice> choices) {
-        super(description, choices);
+    public BlankEvent(Collection<Choice> choices, String description) {
+        super(choices);
+
+        this.description = description;
     }
 
     @Override
     public void applyHistory(Character character) {
-
     }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    private String description;
 }

@@ -1,7 +1,7 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices;
 
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Enemy;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.AICharacter;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BattleEvent;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Usable;
@@ -10,8 +10,8 @@ import br.ufrrj.im.bigtrayenterprises.comp2.aa.Usable;
  * Created by filipebraida on 31/05/16.
  */
 public class BattleChoice extends Choice {
-    public BattleChoice(String description, Event postBattleEvent, Enemy enemy, Usable usable) {
-        super(description);
+    public BattleChoice(Event postBattleEvent, AICharacter enemy, Usable usable) {
+        super(usable.getDescription());
 
         this.enemy = enemy;
         this.postBattleEvent = postBattleEvent;
@@ -24,17 +24,17 @@ public class BattleChoice extends Choice {
     }
 
     @Override
-    public void executeChoice(Character character) {
-        usable.use(character, enemy);
+    public void executeChoice(Player player) {
+        usable.use(player, enemy);
 
         if (enemy.isAlive()) {
-            nextEvent = BattleEvent.makeBattleEvent(postBattleEvent, enemy, character);
+            nextEvent = new BattleEvent(postBattleEvent, enemy, player);
         } else {
             nextEvent = postBattleEvent;
         }
     }
 
-    private Enemy enemy;
+    private AICharacter enemy;
     private Event postBattleEvent;
     private Event nextEvent;
     private Usable usable;

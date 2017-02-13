@@ -1,6 +1,6 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices;
 
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
 
 /**
@@ -19,7 +19,7 @@ public class BlankChoice extends Choice {
     }
 
     @Override
-    public void executeChoice(Character character) {
+    public void executeChoice(Player player) {
 
     }
 

@@ -1,7 +1,7 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.AICharacter;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Enemy;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.BlankChoice;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
@@ -79,7 +79,7 @@ public class Engine {
         player.addItem(branch);
         player.equipItem(branch);
 
-        Event eventoFinal = new BlankEvent("IS DEAD", new ArrayList<>());
+        Event eventoFinal = new BlankEvent(new ArrayList<>(), "IS DEAD");
 
         ArrayList<Choice> start = new ArrayList<>();
 
@@ -91,14 +91,19 @@ public class Engine {
                 .setFirepower(0)
                 .createAttributes();
 
-        Enemy monstro = new Enemy(monstroAttr);
-        BattleEvent battle = BattleEvent.makeBattleEvent(eventoFinal, monstro, player);
+        AICharacter monstro = new AICharacter(monstroAttr) {
+            @Override
+            public Usable chooseUsable(Character enemy) {
+                return null;
+            }
+        };
+        BattleEvent battle = new BattleEvent(eventoFinal, monstro, player);
         Choice help = new BlankChoice("correr", eventoFinal);
         Choice fite = new BlankChoice("bater", battle);
         start.add(help);
         start.add(fite);
 
-        Event inicial = new BlankEvent("Você encontrou um bodybuilder!", start);
+        Event inicial = new BlankEvent(start, "Você encontrou um bodybuilder!");
 
         return new Book("aaa", inicial, player);
     }
