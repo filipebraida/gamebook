@@ -10,6 +10,7 @@ import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BlankEvent;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Item;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.ItemType;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Skills.AutoAttack;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -69,12 +70,7 @@ public class Engine {
                                 .createAttributes(),
                         10,
                         ItemType.AMULET
-                ) {
-                    @Override
-                    public void use(Character character) {
-                        character.changeHealth(-5);
-                    }
-                };
+                );
 
         player.addItem(branch);
         player.equipItem(branch);
@@ -92,9 +88,10 @@ public class Engine {
                 .createAttributes();
 
         AICharacter monstro = new AICharacter(monstroAttr) {
+            AutoAttack ataque = new AutoAttack();
             @Override
             public Usable chooseUsable(Character enemy) {
-                return null;
+                return ataque;
             }
         };
         BattleEvent battle = new BattleEvent(eventoFinal, monstro, player);

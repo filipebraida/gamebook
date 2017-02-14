@@ -26,6 +26,7 @@ public class BattleChoice extends Choice {
     @Override
     public void executeChoice(Player player) {
         usable.use(player, enemy);
+        enemy.chooseUsable(player).use(enemy, player);
 
         if (enemy.isAlive()) {
             nextEvent = new BattleEvent(postBattleEvent, enemy, player);
