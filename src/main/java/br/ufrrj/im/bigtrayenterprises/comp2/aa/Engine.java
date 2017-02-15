@@ -1,15 +1,16 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa;
 
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.AICharacter;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Character;
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Enemy;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.BlankChoice;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BattleEvent;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BlankEvent;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
-import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Amulet;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Item;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.ItemType;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Skills.AutoAttack;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class Engine {
 
         Player player = new Player(attr);
         Item branch =
-                new Amulet(
+                new Item(
                         "Ironwood Branch",
                         new AttributeBuilder()
                                 .setAgility(1)
@@ -67,18 +68,14 @@ public class Engine {
                                 .setArmor(1)
                                 .setFirepower(1)
                                 .createAttributes(),
-                        10
-                ) {
-                    @Override
-                    public void use(Character character) {
-                        character.changeHealth(-5);
-                    }
-                };
+                        10,
+                        ItemType.AMULET
+                );
 
         player.addItem(branch);
         player.equipItem(branch);
 
-        Event eventoFinal = new BlankEvent("IS DEAD", new ArrayList<>());
+        Event eventoFinal = new BlankEvent(new ArrayList<>(), "IS DEAD");
 
         ArrayList<Choice> start = new ArrayList<>();
 
@@ -90,14 +87,20 @@ public class Engine {
                 .setFirepower(0)
                 .createAttributes();
 
-        Enemy monstro = new Enemy(monstroAttr);
-        BattleEvent battle = BattleEvent.makeBattleEvent(eventoFinal, monstro, player);
+        AICharacter monstro = new AICharacter(monstroAttr) {
+            AutoAttack ataque = new AutoAttack();
+            @Override
+            public Usable chooseUsable(Character enemy) {
+                return ataque;
+            }
+        };
+        BattleEvent battle = new BattleEvent(eventoFinal, monstro, player);
         Choice help = new BlankChoice("correr", eventoFinal);
         Choice fite = new BlankChoice("bater", battle);
         start.add(help);
         start.add(fite);
 
-        Event inicial = new BlankEvent("Você encontrou um bodybuilder!", start);
+        Event inicial = new BlankEvent(start, "Você encontrou um bodybuilder!");
 
         return new Book("aaa", inicial, player);
     }
