@@ -1,6 +1,7 @@
 package br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters;
 
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Attributes;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Engine;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Item;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Skills.AutoAttack;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Skills.Skill;
@@ -35,9 +36,9 @@ public class Player extends Character {
         }
 
         if (attr.getCarryCapacity() < item.getWeight() + totalWeight) {
-            System.out.println("Inventário muito cheio!");
+            Engine.source.printString("Inventário muito cheio!");
         } else {
-            System.out.println("Item adicionado ao inventário!");
+            Engine.source.printString("Item adicionado ao inventário!");
             inventory.add(item);
         }
     }
@@ -57,7 +58,7 @@ public class Player extends Character {
             default:
                 throw new IllegalArgumentException("Attempted to equip an unequippable item");
         }
-        System.out.println("Equipou " + item.getName());
+        Engine.source.printString("Equipou " + item.getName());
     }
 
     public Collection<Usable> getUsables() {

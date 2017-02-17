@@ -1,12 +1,43 @@
+// WARNING: This build file is more complex that it has any right to due to IDEA's usage of a wrapper
+// around the Java compiler to compile their .form files.
+// Thanks to https://www.grahamedgecombe.com/blog/2013/04/03/using-intellij-ideas-javac2-in-gradle for this.
+
 plugins {
     id 'com.github.johnrengelman.shadow' version '1.2.3'
 }
 
-apply plugin: 'idea'
+configurations {
+    antTask
+}
+
+repositories {
+    flatDir dirs: "${rootDir}/lib"
+    mavenCentral()
+}
+
+dependencies {
+    antTask name: 'javac2', version: '12.1.0'
+    antTask name: 'forms_rt', version: '12.1.0'
+    antTask name: 'asm-all', version: '12.1.0-idea'
+    antTask group: 'org.jdom', name: 'jdom', version: '1.1'
+}
 apply plugin: 'java'
+
+task compileJava(overwrite: true, dependsOn: configurations.compile.getTaskDependencyFromProjectDependency(true, 'jar')) {
+    doLast {
+        project.sourceSets.main.output.classesDir.mkdirs()
+        ant.taskdef name: 'javac2', classname: 'com.intellij.ant.Javac2', classpath: configurations.antTask.asPath
+        ant.javac2 srcdir: project.sourceSets.main.java.srcDirs.join(':'),
+                classpath: project.sourceSets.main.compileClasspath.asPath,
+                destdir: project.sourceSets.main.output.classesDir,
+                source: sourceCompatibility,
+                target: targetCompatibility,
+                includeAntRuntime: false
+    }
+}
 
 jar {
     manifest {
-        attributes 'Main-Class': 'br.ufrrj.im.bigtrayenterprises.comp2.aa.Engine'
+        attributes 'Main-Class': 'br.ufrrj.im.bigtrayenterprises.comp2.aa.UI.FormMain'
     }
 }

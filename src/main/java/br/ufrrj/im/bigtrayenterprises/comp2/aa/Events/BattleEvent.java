@@ -36,7 +36,7 @@ public class BattleEvent extends Event {
         int i = 0;
         for (Usable usable : player.getUsables()) {
             Choice bChoice = new BattleChoice(postBattleEvent, enemy, usable);
-            bChoice.defineNumber(i);
+            bChoice.setNumber(i);
 
             retval.add(bChoice);
 

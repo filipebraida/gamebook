@@ -12,7 +12,6 @@ import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.Item;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Items.ItemType;
 import br.ufrrj.im.bigtrayenterprises.comp2.aa.Skills.AutoAttack;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -23,29 +22,29 @@ import java.util.Scanner;
 public class Engine {
     public static Random random = new Random();
 
-    public static void main(String[] args) throws IOException {
+    public static IOSource source;
+
+    public void run() {
         Book book = Engine.testBook();
 
-        System.out.println(book.showHistoryBook());
+        source.printString(book.showHistoryBook());
 
         Scanner in = new Scanner(System.in);
 
         do {
-            System.out.println(book.showHistory());
-
-            System.out.println("Escolha:  ");
+            source.printString(book.showHistory());
 
             for (Choice choice : book.nextEvents()) {
-                System.out.println(choice.getDescription());
+                source.addChoice(choice);
             }
 
             int i;
             do {
-                i = in.nextInt();
+                i = source.getChoice();
             } while (!book.nextEvent(i));
         } while (!book.isTheEnd());
 
-        System.out.println(book.showHistory());
+        source.printString(book.showHistory());
     }
 
     public static Book testBook() {
@@ -82,8 +81,8 @@ public class Engine {
         Attributes monstroAttr = new AttributeBuilder()
                 .setAgility(2)
                 .setStrength(1)
-                .setResistance(1)
-                .setArmor(0)
+                .setResistance(3)
+                .setArmor(2)
                 .setFirepower(0)
                 .createAttributes();
 

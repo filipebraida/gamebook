@@ -27,7 +27,7 @@ public abstract class Event {
         int i = this.choices.size();
 
         for (Choice choice : choices) {
-            choice.defineNumber(i);
+            choice.setNumber(i);
             i++;
         }
 
