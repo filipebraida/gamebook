@@ -1,9 +1,12 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+package br.ufrrj.im.bigtrayenterprises.comp2.aa;
+
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Characters.Player;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Choices.Choice;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.BlankEvent;
+import br.ufrrj.im.bigtrayenterprises.comp2.aa.Events.Event;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Scanner;
 
 /**
  * Created by filipebraida on 31/05/16.
@@ -23,29 +26,28 @@ public class Book {
     }
 
     public String showHistory() {
-        return this.eventActually.history();
+        return this.eventActually.getDescription();
     }
 
     public boolean isTheEnd() {
         return this.eventActually.isEndEvent();
     }
 
-    public String showHistoryBook(){
+    public String showHistoryBook() {
         return this.description;
     }
 
     public boolean nextEvent(int number) {
         Choice choice = this.selectChoice(number);
 
-        if(choice != null) {
+        if (choice != null) {
             choice.executeChoice(player);
 
-            if(player.isAlive()) {
-                this.eventActually = choice.getEvent();
+            if (player.isAlive()) {
+                this.eventActually = choice.getNextEvent();
                 this.eventActually.applyHistory(player);
-            }
-            else {
-                Event gameOver = new BlankEvent("Game Over", new ArrayList<Choice>());
+            } else {
+                Event gameOver = new BlankEvent(new ArrayList<Choice>(), "Game Over");
                 this.eventActually = gameOver;
             }
 
@@ -60,7 +62,7 @@ public class Book {
     }
 
     public Collection<Choice> nextEvents() {
-        return this.eventActually.nextEvents();
+        return this.eventActually.getChoices();
     }
 
     private Event eventActually;
