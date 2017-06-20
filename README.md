@@ -7,7 +7,8 @@ Cada equipe (de até três pessoas) irá fazer o fork desse projeto e irá exten
 
 Requisitos:
 * Sistema de Combate
-* Interface Gráfica (do sistema, e não interações de combate, danos entre outro. Apenas para navegação de escolhas e mudança de ventos)
+* Interface com o usuário
+* Leitura de arquivos para a criação da história
 * Sistema de Personagem Elaborado
   * Itens
   * Atributos
